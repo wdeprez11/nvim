@@ -87,16 +87,13 @@ filetype on
 " Plugins: {{{
 set runtimepath+=~/.config/nvim/dein
 
-"dein Scripts-----------------------------
+" Dein: {{{
 " Required:
 set runtimepath+=/home/wd/.config/nvim/dein-cache/repos/github.com/Shougo/dein.vim
 
 " Required:
 if dein#load_state('/home/wd/.config/nvim/dein-cache')
     call dein#begin('/home/wd/.config/nvim/dein-cache')
-
-    " Let dein manage dein
-    " Required:
     call dein#add('/home/wd/.config/nvim/dein-cache/repos/github.com/Shougo/dein.vim')
 
     call dein#add('Shougo/deoplete.nvim')
@@ -110,14 +107,85 @@ if dein#load_state('/home/wd/.config/nvim/dein-cache')
     call dein#add('Shougo/neoinclude.vim')
     call dein#add('Shougo/denite.nvim')
     call dein#add('Shougo/defx.nvim')
+    call dein#add('sebastianmarkow/deoplete-rust')
+    call dein#add('fszymanski/deoplete-emoji')
+    call dein#add('wokalski/autocomplete-flow')
     call dein#add('deoplete-plugins/deoplete-clang')
     call dein#add('deoplete-plugins/deoplete-go')
     call dein#add('deoplete-plugins/deoplete-jedi')
 
+    " Git: {{{
+    call dein#add('jreybert/vimagit')
+    call dein#add('airblade/vim-gitgutter')
+    call dein#add('tpope/vim-fugitive')
+    " }}}
+
+    call dein#add('thaerkh/vim-workspace')
+
+
+    call dein#add('vimwiki/vimwiki')
+
+    "" Linting And Highlighting: {{{
+    call dein#add('sheerun/vim-polyglot')
+    call dein#add('w0rp/ale')
+    call dein#add('octol/vim-cpp-enhanced-highlight')
+    "" }}}
+
+    " UI Navigation: {{{
+    call dein#add('junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' })
+    call dein#add('junegunn/fzf.vim')
+    "call dein#add('christoomey/vim-tmux-navigator')
+    " }}}
+
+    " Appearance: {{{
     call dein#add('Chiel92/vim-autoformat')
     call dein#add('yggdroot/indentline')
+    "call dein#add('google/vim-searchindex')
+    "call dein#add('mhinz/vim-startify') " Kinda cool -- keep an eye on -- use once more robust
+    " }}}
 
-    " Required:
+    " InText Navigation: {{{
+    call dein#add('terryma/vim-multiple-cursors')
+    call dein#add('tpope/vim-surround')
+    call dein#add('Raimondi/delimitMate')
+    call dein#add('justinmk/vim-sneak')
+    call dein#add('mattn/emmet-vim')
+    call dein#add('chaoren/vim-wordmotion')
+    call dein#add('scrooloose/nerdcommenter')
+    " }}}
+
+    "" Untested: {{{
+    "call dein#add('hecal3/vim-leader-guide')
+    "call dein#add('svermeulen/vim-yoink')
+    "call dein#add('chrisbra/unicode.vim')
+    "call dein#add('zefei/vim-wintabs')
+    "call dein#add('terryma/vim-smooth-scroll')
+    "call dein#add('jceb/vim-orgmode')
+    "call dein#add('tpope/vim-obsession')
+    "call dein#add('gcmt/wildfire.vim')
+    "call dein#add('sodapopcan/vim-twiggy')
+    "call dein#add('terryma/vim-expand-region')
+    "call dein#add('kristijanhusak/defx-icons')
+    "call dein#add('ryanoasis/vim-devicons')
+    "call dein#add(Shougo/defx.nvim')
+    "call dein#add('reedes/vim-pencil')
+    "call dein#add('junegunn/gv.vim')
+    "call dein#add('dhruvasagar/vim-zoom')
+    "call dein#add('machakann/vim-sandwich')
+    "call dein#add('kana/vim-textobj-function')
+    "call dein#add('rhysd/vim-operator-surround')
+    "call dein#add('Konfekt/FastFold')
+    "call dein#add('lambdalisue/suda.vim')
+    "call dein#add('gcmt/taboo.vim')
+    "call dein#add('rhysd/clever-f.vim')
+    "call dein#add('kana/vim-textobj-user')
+    "call dein#add('tpope/vim-repeat')
+    "call dein#add('chaoren/vim-wordmotion')
+    "call dein#add('skywind3000/quickmenu.vim')
+    "call dein#add('honza/vim-snippets')
+    "call dein#add('SirVer/ultisnips')
+    "" }}}
+
     call dein#end()
     call dein#save_state()
 endif
@@ -131,113 +199,21 @@ if dein#check_install()
     call dein#install()
 endif
 
-"End dein Scripts-------------------------
-
-if has('nvim')
-    " Call: {{{
-    "call plug#begin('~/.config/nvim/plugged')
-    "" Deoplete: {{{
-    "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    "Plug 'Shougo/neoinclude.vim'
-    ""Plug 'Shougo/deoplete-clangx'
-    "Plug 'sebastianmarkow/deoplete-rust'
-    "Plug 'fszymanski/deoplete-emoji'
-    "Plug 'wokalski/autocomplete-flow'
-    "Plug 'Shougo/neco-vim'
-    "" }}}
-
-    "" Linting And Highlighting: {{{
-    "Plug 'sheerun/vim-polyglot'
-    "Plug 'w0rp/ale'
-    "Plug 'octol/vim-cpp-enhanced-highlight'
-    "" }}}
-
-    "" Git: {{{
-    "Plug 'jreybert/vimagit'
-    "Plug 'airblade/vim-gitgutter'
-    "Plug 'tpope/vim-fugitive'
-    "" }}}
-
-    "" UI Navigation: {{{
-    "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-    "Plug 'junegunn/fzf.vim'
-    ""Plug 'scrooloose/nerdtree'
-
-    "Plug 'christoomey/vim-tmux-navigator'
-    "" }}}
-
-    "" Appearance: {{{
-    "Plug 'Chiel92/vim-autoformat'
-    "Plug 'yggdroot/indentline'
-    "Plug 'google/vim-searchindex'
-    ""Plug 'mhinz/vim-startify' " Kinda cool -- keep an eye on -- use once more robust
-    "" }}}
-
-    "" InText Navigation: {{{
-    "Plug 'scrooloose/nerdcommenter'
-    "Plug 'terryma/vim-multiple-cursors'
-    "Plug 'tpope/vim-surround'
-    "Plug 'Raimondi/delimitMate'
-    "Plug 'justinmk/vim-sneak'
-    "Plug 'mattn/emmet-vim'
-    "Plug 'chaoren/vim-wordmotion'
-    "" }}}
-
-    "" Other: {{{
-    "Plug 'vimwiki/vimwiki'
-    "" }}}
-
-    "" Untested: {{{
-    ""Plug 'hecal3/vim-leader-guide'
-    ""Plug 'svermeulen/vim-yoink'
-    ""Plug 'chrisbra/unicode.vim'
-    ""Plug 'zefei/vim-wintabs'
-    ""Plug 'terryma/vim-smooth-scroll'
-    ""Plug 'jceb/vim-orgmode'
-    ""Plug 'thaerkh/vim-workspace'
-    ""Plug 'tpope/vim-obsession'
-    ""Plug 'gcmt/wildfire.vim'
-    ""Plug 'sodapopcan/vim-twiggy'
-    ""Plug 'terryma/vim-expand-region'
-    ""Plug 'kristijanhusak/defx-icons'
-    ""Plug 'ryanoasis/vim-devicons'
-    "Plug 'Shougo/defx.nvim'
-    ""Plug 'reedes/vim-pencil'
-    ""Plug 'junegunn/gv.vim'
-    ""Plug 'dhruvasagar/vim-zoom'
-    ""Plug 'machakann/vim-sandwich'
-    ""Plug 'kana/vim-textobj-function'
-    ""Plug 'rhysd/vim-operator-surround'
-    ""Plug 'Konfekt/FastFold'
-    ""Plug 'lambdalisue/suda.vim'
-    ""Plug 'gcmt/taboo.vim'
-    ""Plug 'rhysd/clever-f.vim'
-    ""Plug 'kana/vim-textobj-user'
-    ""Plug 'tpope/vim-repeat'
-    ""Plug 'chaoren/vim-wordmotion'
-    ""Plug 'skywind3000/quickmenu.vim'
-    ""Plug 'honza/vim-snippets'
-    "Plug 'SirVer/ultisnips'
-    "" }}}
-
-    "call plug#end()
-    " }}}
-
-    " Configs: {{{
-    let NERDTreeShowHidden=1 " Show hidden files
-    let g:deoplete#enable_at_startup = 1
-    "let g:deoplete#disable_auto_complete = 1
-
-    "call deoplete#custom#option({
-    "\ 'auto_complete_delay': 0,
-    "\ 'smart_case': v:true,
-    "\ })
-    let g:indentLine_color_term = 7
-    let g:indentLine_setColors = 7
-    let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-    " }}}
-endif
 " }}}
+" Configs: {{{
+let NERDTreeShowHidden=1 " Show hidden files
+let g:deoplete#enable_at_startup = 1
+"let g:deoplete#disable_auto_complete = 1
+
+"call deoplete#custom#option({
+"\ 'auto_complete_delay': 0,
+"\ 'smart_case': v:true,
+"\ })
+let g:indentLine_color_term = 7
+let g:indentLine_setColors = 7
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+" }}}
+
 
 "   Split movement
 map <C-h> <C-w>h
