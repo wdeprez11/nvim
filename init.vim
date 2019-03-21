@@ -261,6 +261,10 @@ noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
 
+"   Pasting Rebinds
+vnoremap <C-c> "*y :let @+=@*<CR>
+map <C-v> "+P
+
 "   INSERT macros
 "inoremap " ""<left>
 "inoremap ' ''<left>
