@@ -102,9 +102,7 @@ if dein#load_state('/home/wd/.config/nvim/dein-cache')
     call dein#add('Shougo/neosnippet-snippets')
     call dein#add('Shougo/neoinclude.vim')
     call dein#add('Shougo/denite.nvim')
-    call dein#add('Shougo/defx.nvim')
     call dein#add('sebastianmarkow/deoplete-rust')
-    call dein#add('fszymanski/deoplete-emoji')
     call dein#add('wokalski/autocomplete-flow')
     call dein#add('deoplete-plugins/deoplete-clang')
     call dein#add('deoplete-plugins/deoplete-go')
@@ -114,12 +112,9 @@ if dein#load_state('/home/wd/.config/nvim/dein-cache')
     call dein#add('jreybert/vimagit')
     call dein#add('airblade/vim-gitgutter')
     call dein#add('tpope/vim-fugitive')
+    call dein#add('junegunn/gv.vim')
+    "call dein#add('sodapopcan/vim-twiggy')
     " }}}
-
-    call dein#add('thaerkh/vim-workspace')
-
-
-    call dein#add('vimwiki/vimwiki')
 
     " Linting Assistance And Highlighting: {{{
     call dein#add('sheerun/vim-polyglot')
@@ -132,15 +127,26 @@ if dein#load_state('/home/wd/.config/nvim/dein-cache')
     " UI Navigation: {{{
     call dein#add('junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' })
     call dein#add('junegunn/fzf.vim')
-    "call dein#add('christoomey/vim-tmux-navigator')
+    call dein#add('skywind3000/quickmenu.vim')
+    call dein#add('dhruvasagar/vim-zoom')
+    call dein#add('christoomey/vim-tmux-navigator')
+    call dein#add('Shougo/defx.nvim')
+    "call dein#add('hecal3/vim-leader-guide')
+    "call dein#add('gcmt/taboo.vim')
+    "call dein#add('zefei/vim-wintabs')
     " }}}
 
     " Appearance: {{{
     call dein#add('Chiel92/vim-autoformat')
     call dein#add('yggdroot/indentline')
+    call dein#add('terryma/vim-smooth-scroll')
+    call dein#add('chrisbra/unicode.vim')
+    "call dein#add('kristijanhusak/defx-icons')
+    "call dein#add('ryanoasis/vim-devicons')
+    "call dein#add('fszymanski/deoplete-emoji')
     " }}}
 
-    " InText Navigation: {{{
+    " Navigation: Text jumping and more useful commands {{{
     call dein#add('terryma/vim-multiple-cursors')
     call dein#add('tpope/vim-surround')
     call dein#add('Raimondi/delimitMate')
@@ -148,37 +154,21 @@ if dein#load_state('/home/wd/.config/nvim/dein-cache')
     call dein#add('mattn/emmet-vim')
     call dein#add('chaoren/vim-wordmotion')
     call dein#add('scrooloose/nerdcommenter')
+    call dein#add('gcmt/wildfire.vim')
+    call dein#add('tpope/vim-repeat')
+    call dein#add('rhysd/clever-f.vim')
+    call dein#add('machakann/vim-sandwich')
+    "call dein#add('svermeulen/vim-yoink')
     " }}}
 
-    "" Untested: {{{
-    "call dein#add('hecal3/vim-leader-guide')
-    "call dein#add('svermeulen/vim-yoink')
-    "call dein#add('chrisbra/unicode.vim')
-    "call dein#add('zefei/vim-wintabs')
-    call dein#add('terryma/vim-smooth-scroll')
+    " Notes: {{{
     "call dein#add('jceb/vim-orgmode')
-    "call dein#add('tpope/vim-obsession')
-    call dein#add('gcmt/wildfire.vim')
-    "call dein#add('sodapopcan/vim-twiggy')
-    "call dein#add('terryma/vim-expand-region')
-    "call dein#add('kristijanhusak/defx-icons')
-    "call dein#add('ryanoasis/vim-devicons')
-    "call dein#add(Shougo/defx.nvim')
-    "call dein#add('junegunn/gv.vim')
-    "call dein#add('dhruvasagar/vim-zoom')
-    "call dein#add('machakann/vim-sandwich')
-    "call dein#add('kana/vim-textobj-function')
-    "call dein#add('rhysd/vim-operator-surround')
-    "call dein#add('Konfekt/FastFold')
+    call dein#add('vimwiki/vimwiki')
+    " }}}
+
+    "" Misc: {{{
     "call dein#add('lambdalisue/suda.vim')
-    "call dein#add('gcmt/taboo.vim')
-    "call dein#add('rhysd/clever-f.vim')
-    "call dein#add('kana/vim-textobj-user')
-    "call dein#add('tpope/vim-repeat')
-    "call dein#add('chaoren/vim-wordmotion')
-    call dein#add('skywind3000/quickmenu.vim')
-    "call dein#add('honza/vim-snippets')
-    "call dein#add('SirVer/ultisnips')
+    call dein#add('thaerkh/vim-workspace')
     "" }}}
 
     call dein#end()
