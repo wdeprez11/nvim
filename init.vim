@@ -22,8 +22,6 @@ set vb t_vb=
 set ts=4 sts=4 sw=4 expandtab
 " }}}
 
-" UI Appearance: {{{
-
 " Syntax: {{{
 syntax on
 colorscheme Theme
@@ -53,11 +51,11 @@ highlight vertsplit ctermfg=8 ctermbg=8
 set number
 set relativenumber
 set ruler
+" }}}
 
 " Permanent Gutter: {{{
 autocmd BufRead,BufNewFile * setlocal signcolumn=yes
 autocmd FileType tagbar,nerdtree setlocal signcolumn=no
-" }}}
 " }}}
 
 " Cursor: {{{
@@ -66,7 +64,6 @@ autocmd FileType tagbar,nerdtree setlocal signcolumn=no
 set ttimeoutlen=0
 set modeline
 set mouse=a
-"  set mouse=
 set cursorline
 
 if exists('$TMUX')
@@ -76,7 +73,6 @@ else
     let &t_SI = "\e[5 q"
     let &t_EI = "\e[1 q"
 endif
-" }}}
 " }}}
 
 " Filetype: {{{
@@ -125,11 +121,13 @@ if dein#load_state('/home/wd/.config/nvim/dein-cache')
 
     call dein#add('vimwiki/vimwiki')
 
-    "" Linting And Highlighting: {{{
+    " Linting Assistance And Highlighting: {{{
     call dein#add('sheerun/vim-polyglot')
     call dein#add('w0rp/ale')
     call dein#add('octol/vim-cpp-enhanced-highlight')
-    "" }}}
+    call dein#add('reedes/vim-pencil')
+    call dein#add('rhysd/vim-grammarous')
+    " }}}
 
     " UI Navigation: {{{
     call dein#add('junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' })
@@ -140,8 +138,6 @@ if dein#load_state('/home/wd/.config/nvim/dein-cache')
     " Appearance: {{{
     call dein#add('Chiel92/vim-autoformat')
     call dein#add('yggdroot/indentline')
-    "call dein#add('google/vim-searchindex')
-    "call dein#add('mhinz/vim-startify') " Kinda cool -- keep an eye on -- use once more robust
     " }}}
 
     " InText Navigation: {{{
@@ -159,16 +155,15 @@ if dein#load_state('/home/wd/.config/nvim/dein-cache')
     "call dein#add('svermeulen/vim-yoink')
     "call dein#add('chrisbra/unicode.vim')
     "call dein#add('zefei/vim-wintabs')
-    "call dein#add('terryma/vim-smooth-scroll')
+    call dein#add('terryma/vim-smooth-scroll')
     "call dein#add('jceb/vim-orgmode')
     "call dein#add('tpope/vim-obsession')
-    "call dein#add('gcmt/wildfire.vim')
+    call dein#add('gcmt/wildfire.vim')
     "call dein#add('sodapopcan/vim-twiggy')
     "call dein#add('terryma/vim-expand-region')
     "call dein#add('kristijanhusak/defx-icons')
     "call dein#add('ryanoasis/vim-devicons')
     "call dein#add(Shougo/defx.nvim')
-    "call dein#add('reedes/vim-pencil')
     "call dein#add('junegunn/gv.vim')
     "call dein#add('dhruvasagar/vim-zoom')
     "call dein#add('machakann/vim-sandwich')
@@ -181,7 +176,7 @@ if dein#load_state('/home/wd/.config/nvim/dein-cache')
     "call dein#add('kana/vim-textobj-user')
     "call dein#add('tpope/vim-repeat')
     "call dein#add('chaoren/vim-wordmotion')
-    "call dein#add('skywind3000/quickmenu.vim')
+    call dein#add('skywind3000/quickmenu.vim')
     "call dein#add('honza/vim-snippets')
     "call dein#add('SirVer/ultisnips')
     "" }}}
@@ -225,7 +220,7 @@ map <C-l> <C-w>l
 map <leader>r :so ~/.config/nvim/init.vim \| Autoformat<CR>
 
 "   Spell-check | GUI FAGS BTFO | orthography
-map <leader>o :setlocal spell! spelllang=en_us<CR>
+map <leader>o :setlocal spell! spelllang=en_us,es,fr \| GrammarousCheck<CR>
 
 "   Bibliography | Need to read into this more
 map <leader>b :vsp<space>$BIB<CR>
@@ -239,8 +234,8 @@ map <leader>c :w! \| !compiler <c-r>%<CR><CR>
 "   Open relative .pdf, .html, etc......
 map <leader>p :!opout <c-r>%<CR><CR>
 
-"   NERDTree toggle
-" map <leader>b :NERDTreeToggle<CR>
+"   Fm toggle
+map <leader>b :Defx<CR>
 
 "   Toggle Pasting
 set pastetoggle=<leader>v
@@ -265,24 +260,18 @@ noremap <Right> <Nop>
 vnoremap <C-c> "*y :let @+=@*<CR>
 map <C-v> "+P
 
-"   INSERT macros
-"inoremap " ""<left>
-"inoremap ' ''<left>
+"   Smooth scroll
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 
-"inoremap ( ()<left>
-"inoremap () ()
-"inoremap (<CR> (<CR>)<ESC>O
-"inoremap (;<CR> (<CR>);<ESC>O
-"inoremap (,<CR> (<CR>),<ESC>O
+" Wildfire: {{{
+" This selects the next closest text object.
+map <SPACE> <Plug>(wildfire-fuel)
 
-"inoremap { {}<left>
-"inoremap {} {}
-"inoremap {<CR> {<CR>}<ESC>O
-"inoremap {;<CR> {<CR>};<ESC>O
-"inoremap {,<CR> {<CR>},<ESC>O
+" This selects the previous closest text object.
+vmap <C-SPACE> <Plug>(wildfire-water)
+" }}}
 
-"inoremap [ []<left>
-"inoremap [] []
-"inoremap [<CR> [<CR>]<ESC>O
-"inoremap [;<CR> [<CR>];<ESC>O
-"inoremap [,<CR> [<CR>],<ESC>O
+inoremap {<CR> {<CR>}<ESC>O
