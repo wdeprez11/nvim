@@ -5,9 +5,6 @@ let mapleader = ","
 set encoding=UTF-8
 
 " Change Behaviors: {{{
-if &compatible
-    set nocompatible
-endif
 set wildmode=longest,list,full " Text-completion
 setlocal foldmethod=syntax     " Folding
 set hlsearch                   " Highlight searched words
@@ -24,21 +21,19 @@ set ts=4 sts=4 sw=4 expandtab
 
 " Syntax: {{{
 syntax on
-colorscheme Theme
+"colorscheme Theme
 set t_Co=256
 "set showmatch
 " }}}
 
 " Status: {{{
 set showmode
-source ~/.config/nvim/statusline.vim
+"source ~/.config/nvim/statusline.vim
 " }}}
 
 " VisibleEOL: {{{
-" set list
-" set listchars=tab:▸\ ,eol:¬
-" highlight ExtraWhitespace ctermbg=131
-" highlight NonText ctermfg=7 ctermbg=none
+set list
+set listchars=eol:¬
 " End of file tildes & end of line return character
 " }}}
 
@@ -76,8 +71,9 @@ endif
 " }}}
 
 " Filetype: {{{
-filetype plugin on
-filetype on
+"filetype plugin on
+"filetype on
+filetype plugin indent on
 " }}}
 
 " Plugins: {{{
@@ -124,7 +120,7 @@ if dein#load_state('/home/wd/.config/nvim/dein-cache')
     call dein#add('rhysd/vim-grammarous')
     " }}}
 
-    " UI Navigation: {{{
+    " Interface: {{{
     call dein#add('junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' })
     call dein#add('junegunn/fzf.vim')
     call dein#add('skywind3000/quickmenu.vim')
@@ -141,6 +137,7 @@ if dein#load_state('/home/wd/.config/nvim/dein-cache')
     call dein#add('yggdroot/indentline')
     call dein#add('terryma/vim-smooth-scroll')
     call dein#add('chrisbra/unicode.vim')
+    call dein#add('morhetz/gruvbox')
     "call dein#add('kristijanhusak/defx-icons')
     "call dein#add('ryanoasis/vim-devicons')
     "call dein#add('fszymanski/deoplete-emoji')
@@ -167,7 +164,7 @@ if dein#load_state('/home/wd/.config/nvim/dein-cache')
     " }}}
 
     "" Misc: {{{
-    "call dein#add('lambdalisue/suda.vim')
+    call dein#add('lambdalisue/suda.vim')
     call dein#add('thaerkh/vim-workspace')
     "" }}}
 
@@ -175,25 +172,24 @@ if dein#load_state('/home/wd/.config/nvim/dein-cache')
     call dein#save_state()
 endif
 
-" Required:
-filetype plugin indent on
+"filetype plugin indent on
 syntax enable
 
 " If you want to install not installed plugins on startup.
 if dein#check_install()
     call dein#install()
 endif
-
 " }}}
-" Configs: {{{
+
+" Plugins: Configs {{{
 let NERDTreeShowHidden=1 " Show hidden files
 let g:deoplete#enable_at_startup = 1
 "let g:deoplete#disable_auto_complete = 1
 
-"call deoplete#custom#option({
-"\ 'auto_complete_delay': 0,
-"\ 'smart_case': v:true,
-"\ })
+call deoplete#custom#option({
+            \ 'auto_complete_delay': 0,
+            \ 'smart_case': v:true,
+            \ })
 let g:indentLine_color_term = 7
 let g:indentLine_setColors = 7
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
@@ -265,3 +261,41 @@ vmap <C-SPACE> <Plug>(wildfire-water)
 " }}}
 
 inoremap {<CR> {<CR>}<ESC>O
+
+let g:gruvbox_italic=1
+colorscheme gruvbox
+set termguicolors
+
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+            \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+            \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+highlight SignColumn ctermbg=243 guibg=#282828
+"highlight Folded ctermfg=243 guifg=#7c6f64
+highlight FoldColumn ctermfg=243 guifg=#7c6f64
+highlight SignColumn ctermfg=243 guifg=#7c6f64
+
+"highlight ALEErrorSign ctermfg=243 guifg=#7c6f64
+"highlight ALEWarningSign ctermfg=243 guifg=#7c6f64
+"highlight ALEInfoSign ctermfg=243 guifg=#7c6f64
+
+"highlight diffAdded ctermfg=243 guifg=#7c6f64
+"highlight diffRemoved ctermfg=243 guifg=#7c6f64
+"highlight diffChanged ctermfg=243 guifg=#7c6f64
+
+"highlight diffFile ctermfg=243 guifg=#7c6f64
+"highlight diffNewFile ctermfg=243 guifg=#7c6f64
+
+"highlight diffLine ctermfg=243 guifg=#7c6f64
+highlight GitGutterAdd ctermfg=142 ctermbg=237 guifg=#b8bb26 guibg=#282828
+"highlight GitGutterAdd ctermfg=142 ctermbg=237 guifg=#b8bb26 guibg=#3c3836
+"highlight GitGutterAdd ctermfg=108 guifg=#8ec07c
+highlight GitGutterChange ctermfg=108 ctermbg=237 guifg=#8ec07c guibg=#282828
+"highlight GitGutterChange ctermfg=108 ctermbg=237 guifg=#8ec07c guibg=#3c3836
+"highlight GitGutterChange ctermfg=243 guifg=#7c6f64
+highlight GitGutterDelete ctermfg=167 ctermbg=237 guifg=#fb4934 guibg=#282828
+"highlight GitGutterDelete ctermfg=167 ctermbg=237 guifg=#fb4934 guibg=#3c3836
+"highlight GitGutterDelete ctermfg=243 guifg=#7c6f64
+highlight GitGutterChangeDelete ctermfg=108 ctermbg=237 guifg=#8ec07c guibg=#282828
+"highlight GitGutterChangeDelete ctermfg=108 ctermbg=237 guifg=#8ec07c guibg=#3c3836
+"highlight GitGutterChangeDelete ctermfg=243 guifg=#7c6f64
