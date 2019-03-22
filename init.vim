@@ -27,7 +27,7 @@ set t_Co=256
 " }}}
 
 " Status: {{{
-set showmode
+set noshowmode " Disable showing mode
 "source ~/.config/nvim/statusline.vim
 " }}}
 
@@ -103,6 +103,7 @@ if dein#load_state('/home/wd/.config/nvim/dein-cache')
     call dein#add('deoplete-plugins/deoplete-clang')
     call dein#add('deoplete-plugins/deoplete-go')
     call dein#add('deoplete-plugins/deoplete-jedi')
+    call dein#add('mboughaba/i3config.vim')
 
     " Git: {{{
     call dein#add('jreybert/vimagit')
@@ -138,6 +139,7 @@ if dein#load_state('/home/wd/.config/nvim/dein-cache')
     call dein#add('terryma/vim-smooth-scroll')
     call dein#add('chrisbra/unicode.vim')
     call dein#add('morhetz/gruvbox')
+    call dein#add('vim-airline/vim-airline')
     "call dein#add('kristijanhusak/defx-icons')
     "call dein#add('ryanoasis/vim-devicons')
     "call dein#add('fszymanski/deoplete-emoji')
@@ -190,9 +192,12 @@ call deoplete#custom#option({
             \ 'auto_complete_delay': 0,
             \ 'smart_case': v:true,
             \ })
+
 let g:indentLine_color_term = 7
 let g:indentLine_setColors = 7
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+
+let g:airline#extensions#tabline#enabled = 1
 " }}}
 
 
@@ -244,7 +249,7 @@ noremap <Right> <Nop>
 
 "   Pasting Rebinds
 vnoremap <C-c> "*y :let @+=@*<CR>
-map <C-v> "+P
+inoremap <C-v> "+P
 
 "   Smooth scroll
 noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
