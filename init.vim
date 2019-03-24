@@ -33,7 +33,7 @@ set noshowmode " Disable showing mode
 
 " VisibleEOL: {{{
 set list
-set listchars=eol:¬
+"set listchars=eol:¬
 " End of file tildes & end of line return character
 " }}}
 
@@ -104,6 +104,7 @@ if dein#load_state('/home/wd/.config/nvim/dein-cache')
     call dein#add('deoplete-plugins/deoplete-go')
     call dein#add('deoplete-plugins/deoplete-jedi')
     call dein#add('mboughaba/i3config.vim')
+    "call dein#add('vim-latex/vim-latex')
 
     " Git: {{{
     call dein#add('jreybert/vimagit')
@@ -140,6 +141,7 @@ if dein#load_state('/home/wd/.config/nvim/dein-cache')
     call dein#add('chrisbra/unicode.vim')
     call dein#add('morhetz/gruvbox')
     call dein#add('vim-airline/vim-airline')
+    call dein#add('gko/vim-coloresque')
     "call dein#add('kristijanhusak/defx-icons')
     "call dein#add('ryanoasis/vim-devicons')
     "call dein#add('fszymanski/deoplete-emoji')
@@ -168,6 +170,7 @@ if dein#load_state('/home/wd/.config/nvim/dein-cache')
     "" Misc: {{{
     call dein#add('lambdalisue/suda.vim')
     call dein#add('thaerkh/vim-workspace')
+    "call dein#add('skywind3000/asyncrun.vim')
     "" }}}
 
     call dein#end()
@@ -198,8 +201,10 @@ let g:indentLine_setColors = 7
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
 " }}}
 
+set listchars=eol:¬
 
 "   Split movement
 map <C-h> <C-w>h
@@ -211,7 +216,7 @@ map <C-l> <C-w>l
 map <leader>r :so ~/.config/nvim/init.vim \| Autoformat<CR>
 
 "   Spell-check | GUI FAGS BTFO | orthography
-map <leader>o :setlocal spell! spelllang=en_us,es,fr \| GrammarousCheck<CR>
+map <leader>o :setlocal spell! spelllang=en_us<CR>
 
 "   Bibliography | Need to read into this more
 map <leader>b :vsp<space>$BIB<CR>
@@ -247,6 +252,11 @@ noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
 
+inoremap <Up> <Nop>
+inoremap <Down> <Nop>
+inoremap <Left> <Nop>
+inoremap <Right> <Nop>
+
 "   Pasting Rebinds
 vnoremap <C-c> "*y :let @+=@*<CR>
 inoremap <C-v> "+P
@@ -280,9 +290,9 @@ highlight SignColumn ctermbg=243 guibg=#282828
 highlight FoldColumn ctermfg=243 guifg=#7c6f64
 highlight SignColumn ctermfg=243 guifg=#7c6f64
 
-"highlight ALEErrorSign ctermfg=243 guifg=#7c6f64
-"highlight ALEWarningSign ctermfg=243 guifg=#7c6f64
-"highlight ALEInfoSign ctermfg=243 guifg=#7c6f64
+highlight ALEErrorSign ctermfg=167 ctermbg=237 guifg=#fb4934 guibg=#282828
+highlight ALEWarningSign ctermfg=214 ctermbg=237 guifg=#fabd2f guibg=#282828
+highlight ALEInfoSign ctermfg=109 ctermbg=237 guifg=#83a598 guibg=#282828
 
 "highlight diffAdded ctermfg=243 guifg=#7c6f64
 "highlight diffRemoved ctermfg=243 guifg=#7c6f64
@@ -292,15 +302,8 @@ highlight SignColumn ctermfg=243 guifg=#7c6f64
 "highlight diffNewFile ctermfg=243 guifg=#7c6f64
 
 "highlight diffLine ctermfg=243 guifg=#7c6f64
+
 highlight GitGutterAdd ctermfg=142 ctermbg=237 guifg=#b8bb26 guibg=#282828
-"highlight GitGutterAdd ctermfg=142 ctermbg=237 guifg=#b8bb26 guibg=#3c3836
-"highlight GitGutterAdd ctermfg=108 guifg=#8ec07c
 highlight GitGutterChange ctermfg=108 ctermbg=237 guifg=#8ec07c guibg=#282828
-"highlight GitGutterChange ctermfg=108 ctermbg=237 guifg=#8ec07c guibg=#3c3836
-"highlight GitGutterChange ctermfg=243 guifg=#7c6f64
 highlight GitGutterDelete ctermfg=167 ctermbg=237 guifg=#fb4934 guibg=#282828
-"highlight GitGutterDelete ctermfg=167 ctermbg=237 guifg=#fb4934 guibg=#3c3836
-"highlight GitGutterDelete ctermfg=243 guifg=#7c6f64
 highlight GitGutterChangeDelete ctermfg=108 ctermbg=237 guifg=#8ec07c guibg=#282828
-"highlight GitGutterChangeDelete ctermfg=108 ctermbg=237 guifg=#8ec07c guibg=#3c3836
-"highlight GitGutterChangeDelete ctermfg=243 guifg=#7c6f64
