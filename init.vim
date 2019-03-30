@@ -31,12 +31,6 @@ set noshowmode " Disable showing mode
 "source ~/.config/nvim/statusline.vim
 " }}}
 
-" VisibleEOL: {{{
-set list
-"set listchars=eol:¬
-" End of file tildes & end of line return character
-" }}}
-
 " Splits: {{{
 set fillchars+=vert:\|
 highlight vertsplit ctermfg=8 ctermbg=8
@@ -170,7 +164,7 @@ if dein#load_state('/home/wd/.config/nvim/dein-cache')
     "" Misc: {{{
     call dein#add('lambdalisue/suda.vim')
     call dein#add('thaerkh/vim-workspace')
-    "call dein#add('skywind3000/asyncrun.vim')
+    call dein#add('skywind3000/asyncrun.vim')
     "" }}}
 
     call dein#end()
@@ -196,6 +190,34 @@ call deoplete#custom#option({
             \ 'smart_case': v:true,
             \ })
 
+function! s:defx_my_settions() abort
+    nnoremap <silent><buffer><expr> O
+                \ defx#do_action('open')
+endfunction
+
+"call defx#do_action(defx-action-cd)
+"call defx#do_action(change_vim_cwd)
+
+"call defx#do_action()
+
+call defx#custom#column('filename', {
+            \ 'directory_icon': '▸',
+            \ 'opened_icon': '▾',
+            \ 'root_icon': ' ',
+            \ 'min_width': 40,
+            \ 'max_width': 40,
+            \ })
+
+call defx#custom#option('_', {
+            \ 'columns': 'mark:filename:type:size:time',
+            \ })
+
+
+call defx#custom#column('mark', {
+            \ 'readonly_icon': '✗',
+            \ 'selected_icon': '✓',
+            \ })
+
 let g:indentLine_color_term = 7
 let g:indentLine_setColors = 7
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
@@ -204,6 +226,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 " }}}
 
+set list
 set listchars=eol:¬
 
 "   Split movement
@@ -216,7 +239,8 @@ map <C-l> <C-w>l
 map <leader>r :so ~/.config/nvim/init.vim \| Autoformat<CR>
 
 "   Spell-check | GUI FAGS BTFO | orthography
-map <leader>o :setlocal spell! spelllang=en_us<CR>
+"map <leader>o :setlocal spell! spelllang=en_us,es,fr \| GrammarousCheck<CR>
+map <leader>o :setlocal spell! spelllang=en_us,es,fr<CR>
 
 "   Bibliography | Need to read into this more
 map <leader>b :vsp<space>$BIB<CR>
@@ -225,10 +249,10 @@ map <leader>b :vsp<space>$BIB<CR>
 map <leader>u :w<Home> silent <End> !urlview<CR>
 
 "   Compile doc
-map <leader>c :w! \| !compiler <c-r>%<CR><CR>
+map <leader>c :w! \| !compiler <c-r>%<CR>
 
 "   Open relative .pdf, .html, etc......
-map <leader>p :!opout <c-r>%<CR><CR>
+map <leader>p :!opout <c-r>%<CR>
 
 "   Fm toggle
 map <leader>b :Defx<CR>
@@ -286,7 +310,7 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
             \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 highlight SignColumn ctermbg=243 guibg=#282828
-"highlight Folded ctermfg=243 guifg=#7c6f64
+highlight Folded ctermfg=243 guifg=#7c6f64
 highlight FoldColumn ctermfg=243 guifg=#7c6f64
 highlight SignColumn ctermfg=243 guifg=#7c6f64
 
@@ -294,9 +318,6 @@ highlight ALEErrorSign ctermfg=167 ctermbg=237 guifg=#fb4934 guibg=#282828
 highlight ALEWarningSign ctermfg=214 ctermbg=237 guifg=#fabd2f guibg=#282828
 highlight ALEInfoSign ctermfg=109 ctermbg=237 guifg=#83a598 guibg=#282828
 
-"highlight diffAdded ctermfg=243 guifg=#7c6f64
-"highlight diffRemoved ctermfg=243 guifg=#7c6f64
-"highlight diffChanged ctermfg=243 guifg=#7c6f64
 
 "highlight diffFile ctermfg=243 guifg=#7c6f64
 "highlight diffNewFile ctermfg=243 guifg=#7c6f64
