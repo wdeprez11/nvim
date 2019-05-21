@@ -1,8 +1,15 @@
 " 'init.vim' -- vimrc
 " Description: Initial startup commands for neovim
 
+if !has('nvim')
+    set encoding=UTF-8
+    set t_Co=256
+    syntax on
+    filetype plugin indent on
+    set pastetoggle=<leader>v
+endif
+
 let mapleader = ","
-set encoding=UTF-8
 
 " Change Behaviors: {{{
 set wildmode=longest,list,full " Text-completion
@@ -15,14 +22,12 @@ set smartcase
 " }}}
 
 " Tabs: {{{
-set vb t_vb=
+set visualbell
 set ts=4 sts=4 sw=4 expandtab
 " }}}
 
 " Syntax: {{{
-syntax on
 "colorscheme Theme
-set t_Co=256
 "set showmatch
 " }}}
 
@@ -43,8 +48,10 @@ set ruler
 " }}}
 
 " Permanent Gutter: {{{
-autocmd BufRead,BufNewFile * setlocal signcolumn=yes
-autocmd FileType tagbar,nerdtree setlocal signcolumn=no
+augroup Gutter
+    autocmd BufRead,BufNewFile * setlocal signcolumn=yes
+    autocmd FileType tagbar,nerdtree setlocal signcolumn=no
+augroup END
 " }}}
 
 " Cursor: {{{
@@ -64,23 +71,27 @@ else
 endif
 " }}}
 
-" Filetype: {{{
-"filetype plugin on
-"filetype on
-filetype plugin indent on
-" }}}
-
 " Plugins: {{{
-set runtimepath+=~/.config/nvim/dein
+" set runtimepath+=$HOME/.config/nvim/dein
+set runtimepath+=/home/wd/.config/nvim/dein " TEMP WHILE FIGURING OUT ROOT SITUATION
 
 " Dein: {{{
 " Required:
-set runtimepath+=/home/wd/.config/nvim/dein-cache/repos/github.com/Shougo/dein.vim
+" set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
+set runtimepath+=/home/wd/.cache/dein/repos/github.com/Shougo/dein.vim " TEMP WHILE FIGURING OUT ROOT SITUATION
+"set+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
-if dein#load_state('/home/wd/.config/nvim/dein-cache')
-    call dein#begin('/home/wd/.config/nvim/dein-cache')
-    call dein#add('/home/wd/.config/nvim/dein-cache/repos/github.com/Shougo/dein.vim')
+"if dein#load_state('$HOME/.cache/dein')
+"call dein#begin('$HOME/.cache/dein')
+"call dein#add('$HOME/.cache/dein/repos/github.com/Shougo/dein.vim')
+"
+" TEMP WHILE FIGURING OUT ROOT SITUATION
+if dein#load_state('/home/wd/.cache/dein')
+    " TEMP WHILE FIGURING OUT ROOT SITUATION
+    call dein#begin('/home/wd/.cache/dein')
+    " TEMP WHILE FIGURING OUT ROOT SITUATION
+    call dein#add('/home/wd/.cache/dein/repos/github.com/Shougo/dein.vim')
 
     call dein#add('Shougo/deoplete.nvim')
     if !has('nvim')
@@ -98,6 +109,9 @@ if dein#load_state('/home/wd/.config/nvim/dein-cache')
     call dein#add('deoplete-plugins/deoplete-go')
     call dein#add('deoplete-plugins/deoplete-jedi')
     call dein#add('mboughaba/i3config.vim')
+    call dein#add('kovetskiy/sxhkd-vim')
+    call dein#add('neovimhaskell/haskell-vim')
+    call dein#add('Twinside/vim-syntax-haskell-cabal')
     "call dein#add('vim-latex/vim-latex')
 
     " Git: {{{
@@ -113,7 +127,7 @@ if dein#load_state('/home/wd/.config/nvim/dein-cache')
     call dein#add('w0rp/ale')
     call dein#add('octol/vim-cpp-enhanced-highlight')
     call dein#add('reedes/vim-pencil')
-    call dein#add('rhysd/vim-grammarous')
+    "call dein#add('rhysd/vim-grammarous')
     " }}}
 
     " Interface: {{{
@@ -130,12 +144,13 @@ if dein#load_state('/home/wd/.config/nvim/dein-cache')
 
     " Appearance: {{{
     call dein#add('Chiel92/vim-autoformat')
-    call dein#add('yggdroot/indentline')
+    "call dein#add('yggdroot/indentline')
     call dein#add('terryma/vim-smooth-scroll')
     call dein#add('chrisbra/unicode.vim')
     call dein#add('morhetz/gruvbox')
-    call dein#add('vim-airline/vim-airline')
-    call dein#add('gko/vim-coloresque')
+    "call dein#add('vim-airline/vim-airline')
+    call dein#add('itchyny/lightline.vim')
+    "call dein#add('lilydjwg/colorizer')
     "call dein#add('kristijanhusak/defx-icons')
     "call dein#add('ryanoasis/vim-devicons')
     "call dein#add('fszymanski/deoplete-emoji')
@@ -171,8 +186,7 @@ if dein#load_state('/home/wd/.config/nvim/dein-cache')
     call dein#save_state()
 endif
 
-"filetype plugin indent on
-syntax enable
+"syntax enable
 
 " If you want to install not installed plugins on startup.
 if dein#check_install()
@@ -218,16 +232,20 @@ call defx#custom#column('mark', {
             \ 'selected_icon': '✓',
             \ })
 
-let g:indentLine_color_term = 7
-let g:indentLine_setColors = 7
-let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+"let g:indentLine_color_term = 7
+"let g:indentLine_setColors = 7
+"let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline_powerline_fonts = 1
 " }}}
 
-set list
-set listchars=eol:¬
+set list!
+if has('gui_running')
+    set listchars=tab:>-,eol:¬,trail:·,nbsp:⎵
+else
+    set listchars=tab:>-,eol:¬,trail:.,nbsp:⎵
+endif
 
 "   Split movement
 map <C-h> <C-w>h
@@ -236,7 +254,7 @@ map <C-k> <C-w>k
 map <C-l> <C-w>l
 
 "   Refresh
-map <leader>r :so ~/.config/nvim/init.vim \| Autoformat<CR>
+" map <leader>r :source $MYVIMRC \| Autoformat<CR>
 
 "   Spell-check | GUI FAGS BTFO | orthography
 "map <leader>o :setlocal spell! spelllang=en_us,es,fr \| GrammarousCheck<CR>
@@ -258,7 +276,6 @@ map <leader>p :!opout <c-r>%<CR>
 map <leader>b :Defx<CR>
 
 "   Toggle Pasting
-set pastetoggle=<leader>v
 
 "   GTFO Ugly Shidd!!
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -268,7 +285,9 @@ autocmd VimLeave *.tex !texclear %
 autocmd BufWritePre * %s/\s\+$//e
 
 "   Format Code
-autocmd BufWrite * :Autoformat
+augroup A
+    autocmd BufWrite * :Autoformat
+augroup END
 
 "   Disable Arrows
 noremap <Up> <Nop>
