@@ -72,26 +72,17 @@ endif
 " }}}
 
 " Plugins: {{{
-" set runtimepath+=$HOME/.config/nvim/dein
-set runtimepath+=/home/wd/.config/nvim/dein " TEMP WHILE FIGURING OUT ROOT SITUATION
+set runtimepath+=$HOME/.config/nvim/dein
 
 " Dein: {{{
 " Required:
-" set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
-set runtimepath+=/home/wd/.cache/dein/repos/github.com/Shougo/dein.vim " TEMP WHILE FIGURING OUT ROOT SITUATION
+set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 "set+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
-"if dein#load_state('$HOME/.cache/dein')
-"call dein#begin('$HOME/.cache/dein')
-"call dein#add('$HOME/.cache/dein/repos/github.com/Shougo/dein.vim')
-"
-" TEMP WHILE FIGURING OUT ROOT SITUATION
-if dein#load_state('/home/wd/.cache/dein')
-    " TEMP WHILE FIGURING OUT ROOT SITUATION
-    call dein#begin('/home/wd/.cache/dein')
-    " TEMP WHILE FIGURING OUT ROOT SITUATION
-    call dein#add('/home/wd/.cache/dein/repos/github.com/Shougo/dein.vim')
+if dein#load_state('$HOME/.cache/dein')
+    call dein#begin('$HOME/.cache/dein')
+    call dein#add('$HOME/.cache/dein/repos/github.com/Shougo/dein.vim')
 
     call dein#add('Shougo/deoplete.nvim')
     if !has('nvim')
@@ -236,8 +227,6 @@ call defx#custom#column('mark', {
 "let g:indentLine_setColors = 7
 "let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
-"let g:airline#extensions#tabline#enabled = 1
-"let g:airline_powerline_fonts = 1
 " }}}
 
 set list!
@@ -257,7 +246,6 @@ map <C-l> <C-w>l
 " map <leader>r :source $MYVIMRC \| Autoformat<CR>
 
 "   Spell-check | GUI FAGS BTFO | orthography
-"map <leader>o :setlocal spell! spelllang=en_us,es,fr \| GrammarousCheck<CR>
 map <leader>o :setlocal spell! spelllang=en_us,es,fr<CR>
 
 "   Bibliography | Need to read into this more
@@ -287,6 +275,7 @@ autocmd BufWritePre * %s/\s\+$//e
 "   Format Code
 augroup A
     autocmd BufWrite * :Autoformat
+    autocmd FileType haskell let b:autoformat_autoindent=0
 augroup END
 
 "   Disable Arrows
